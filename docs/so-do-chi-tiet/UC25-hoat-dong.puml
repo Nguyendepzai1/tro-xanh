@@ -1,0 +1,19 @@
+@startuml
+title UC25 Kiểm duyệt đánh giá phòng
+start
+:Đọc đánh giá và kiểm tra nội dung;
+:Chọn công khai, từ chối hoặc ẩn đánh giá;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Nhập ghi chú và kiểm tra trạng thái cũ;
+if (Trạng thái quyết định khác trạng thái hiện tại?) then (Có)
+:Lưu trạng thái, ghi chú và người kiểm duyệt;
+:Ghi nhật ký quyết định của quản trị viên;
+:Cập nhật điểm trung bình khi đọc công khai;
+else (Không)
+:Quyết định lặp: không xử lý lại;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

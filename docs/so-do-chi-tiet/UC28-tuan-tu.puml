@@ -1,0 +1,21 @@
+@startuml
+title UC28 Chọn địa chỉ trên toàn quốc
+actor "Người truy cập" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "Danh mục JSON" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: GET /api/address-catalog/:code
+API -> API: Kiểm tra mã tỉnh có trong danh mục
+API -> DB: Đọc danh mục tên và mã đã nạp vào bộ nhớ
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: Lấy phường, xã, đặc khu thuộc đúng tỉnh
+DB --> API: Kết quả
+API --> UI: 200 tên tỉnh và danh sách đơn vị cấp xã
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 404
+UI --> U: Thông báo lỗi
+end
+@enduml

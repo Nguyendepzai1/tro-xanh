@@ -1,0 +1,19 @@
+@startuml
+title UC04 Cấp quyền sau đối chiếu hồ sơ
+start
+:Xem ảnh riêng và thông tin nhà trọ;
+:Đối chiếu địa chỉ và liên hệ người gửi;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Nhập kết quả cùng xác nhận đã kiểm tra;
+if (Đã đối chiếu và quyết định hợp lệ?) then (Có)
+:Cập nhật hồ sơ và yêu cầu cấp quyền;
+:Cấp quyền nếu duyệt trong transaction;
+:Thông báo kết quả xét duyệt hồ sơ;
+else (Không)
+:Chưa đối chiếu hoặc đã xử lý: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

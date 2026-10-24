@@ -1,0 +1,19 @@
+@startuml
+title UC08 Lưu phòng quan tâm
+start
+:Chọn biểu tượng lưu tại một tin phòng;
+:Kiểm tra tài khoản người tìm phòng;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra quyền hiển thị của tin;
+if (Tin còn hiển thị công khai?) then (Có)
+:Thêm liên kết user_id và listing_id;
+:Khóa chính ghép ngăn tạo bản ghi trùng;
+:Đổi trạng thái biểu tượng sang đã lưu;
+else (Không)
+:Tin không còn hiển thị: lỗi 404;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

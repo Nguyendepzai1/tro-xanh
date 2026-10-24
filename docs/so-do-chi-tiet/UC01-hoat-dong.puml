@@ -1,0 +1,19 @@
+@startuml
+title UC01 Đăng ký tài khoản
+start
+:Nhập họ tên, email, điện thoại và mật khẩu;
+:Máy chủ kiểm tra dữ liệu và vai trò;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Tra cứu email trong users;
+if (Email chưa được sử dụng?) then (Có)
+:Băm mật khẩu với muối ngẫu nhiên;
+:Lưu tài khoản; owner có approved = 0;
+:Thông báo đăng ký thành công;
+else (Không)
+:Email trùng: trả lỗi 409;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

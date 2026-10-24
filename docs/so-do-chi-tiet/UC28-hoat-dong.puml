@@ -1,0 +1,19 @@
+@startuml
+title UC28 Chọn địa chỉ trên toàn quốc
+start
+:Chọn tỉnh/thành trong danh sách toàn quốc;
+:Bỏ phường/xã đã chọn của tỉnh trước;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu mã tỉnh với danh mục hiện hành;
+if (Mã tỉnh tồn tại trong danh mục?) then (Có)
+:Trả đủ danh sách phường/xã của tỉnh;
+:Ghép nhóm khu vực cũ có trong tin hiện có;
+:Tìm tên không dấu và chọn khu vực cần lọc;
+else (Không)
+:Mã không tồn tại: thông báo lỗi 404;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

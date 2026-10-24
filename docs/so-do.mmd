@@ -1,0 +1,12 @@
+%% Sơ đồ nguồn để mở rộng báo cáo
+erDiagram
+    users ||--o{ sessions : has
+    users ||--o{ owner_requests : submits
+    users ||--o{ listings : owns
+    users ||--o{ favorites : saves
+    listings ||--o{ favorites : saved
+    users ||--o{ inquiries : sends
+    listings ||--o{ inquiries : receives
+    listings ||--o{ leases : rents
+    leases ||--o{ invoices : bills
+    users ||--o{ audit_logs : performs

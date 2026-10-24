@@ -1,0 +1,21 @@
+@startuml
+title UC17 Xem hồ sơ công khai chủ trọ
+actor "Người truy cập" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: GET /api/owners/:id
+API -> API: Kiểm tra chủ trọ được phép công khai
+API -> DB: SELECT giới thiệu và mức xét duyệt hồ sơ
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: SELECT tin published và available thuộc chủ trọ
+DB --> API: Kết quả
+API --> UI: 200 hồ sơ và danh sách phòng trống
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 404
+UI --> U: Thông báo lỗi
+end
+@enduml

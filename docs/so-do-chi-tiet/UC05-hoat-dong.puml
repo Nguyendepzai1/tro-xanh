@@ -1,0 +1,19 @@
+@startuml
+title UC05 Đăng tin cho thuê
+start
+:Nhập giá, diện tích, địa chỉ, tiện ích và ảnh;
+:Kiểm tra quyền owner đã được cấp;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra số liệu và tệp ảnh trong hệ thống;
+if (Thông tin và ảnh hợp lệ?) then (Có)
+:Lưu tin mới với status = pending;
+:Ghi nhật ký tạo tin cho thuê;
+:Thông báo gửi duyệt; chưa hiển thị công khai;
+else (Không)
+:Dữ liệu hoặc ảnh sai: lỗi 400;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+title UC07 Tìm kiếm và lọc phòng
+start
+:Nhập từ khóa và điều kiện tìm phòng;
+:Kiểm tra khoảng giá, diện tích và số trang;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Chuẩn hóa tiếng Việt; đếm tin đáp ứng;
+if (Có phòng đáp ứng bộ lọc?) then (Có)
+:Lấy tối đa 12 tin theo thứ tự đã chọn;
+:Loại bỏ trường nội bộ khỏi kết quả;
+:Hiển thị số lượng, thẻ phòng và phân trang;
+else (Không)
+:Không có phòng: danh sách rỗng, HTTP 200;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

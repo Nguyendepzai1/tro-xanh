@@ -1,0 +1,19 @@
+@startuml
+title UC13 Ghi nhận đã thu tiền
+start
+:Chọn ghi nhận thu; xác nhận đã nhận tiền;
+:Kiểm tra vai trò và quyền sở hữu;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đọc hóa đơn và trạng thái thanh toán;
+if (Hóa đơn còn unpaid?) then (Có)
+:Đặt status = paid và thời gian ghi nhận;
+:Ghi nhật ký người thực hiện thao tác;
+:Hiển thị đã thu; người thuê xem được;
+else (Không)
+:Đã paid: trả lỗi 409;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title UC25 Kiểm duyệt đánh giá phòng
+actor "Quản trị viên" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: PATCH /api/admin/reviews/:id
+API -> API: Kiểm tra admin, quyết định và ghi chú
+API -> DB: SELECT đánh giá và trạng thái hiện tại
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: UPDATE reviews status, note, reviewed_by
+DB --> API: Kết quả
+API --> UI: 200 cập nhật quyết định kiểm duyệt
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 400 / 401 / 403 / 404 / 409
+UI --> U: Thông báo lỗi
+end
+@enduml

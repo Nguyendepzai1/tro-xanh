@@ -1,0 +1,19 @@
+@startuml
+title UC23 So sánh phòng còn cho thuê
+start
+:Chọn 2 hoặc 3 phòng trên thẻ tin;
+:Kiểm tra mã phòng và số lượng lựa chọn;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu công khai, chủ trọ và giữ chỗ;
+if (Có phòng còn công khai và chưa giữ chỗ?) then (Có)
+:Lấy giá thuê, cọc, diện tích và tiện ích;
+:Loại mã không còn hợp lệ, báo người dùng;
+:Hiển thị bảng và ước tính chi phí;
+else (Không)
+:Không còn phòng: hướng dẫn chọn lại;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

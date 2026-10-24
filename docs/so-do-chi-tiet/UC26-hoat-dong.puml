@@ -1,0 +1,19 @@
+@startuml
+title UC26 Báo cáo thông tin tin phòng
+start
+:Mở tin và chọn báo cáo thông tin;
+:Chọn một lý do và mô tả vấn đề;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra chủ tin, trùng và hạn mức 24 giờ;
+if (Tin công khai, chưa báo trùng và còn hạn mức?) then (Có)
+:Lưu báo cáo open gắn đúng tài khoản;
+:Ghi nhật ký và giữ nguyên tin công khai;
+:Hiển thị báo cáo trong lịch sử riêng;
+else (Không)
+:Đã có báo cáo mở hoặc quá 10 lượt/ngày;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

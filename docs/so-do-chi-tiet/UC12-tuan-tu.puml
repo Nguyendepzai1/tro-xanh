@@ -1,0 +1,21 @@
+@startuml
+title UC12 Lập hóa đơn tháng
+actor "Chủ trọ" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: POST /api/invoices
+API -> API: Kiểm tra owner, số tiêu thụ và tháng
+API -> DB: SELECT hợp đồng/đơn giá và hóa đơn trùng kỳ
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: Tính tổng tại server; INSERT invoices unpaid; audit
+DB --> API: Kết quả
+API --> UI: 200 — hóa đơn và tổng tiền
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 400 / 401 / 403 / 404 / 409
+UI --> U: Thông báo lỗi
+end
+@enduml

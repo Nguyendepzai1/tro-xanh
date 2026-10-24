@@ -1,0 +1,19 @@
+@startuml
+title UC03 Gửi yêu cầu cấp quyền
+start
+:Nhập địa chỉ, quyền cho thuê và minh chứng;
+:Kiểm tra phiên chủ trọ và dữ liệu nhập;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra tệp riêng và hồ sơ đang chờ;
+if (Minh chứng hợp lệ và chưa gửi trùng?) then (Có)
+:Lưu hồ sơ để quản trị viên đối chiếu;
+:Tạo yêu cầu cấp quyền và ghi nhật ký;
+:Thông báo hồ sơ đang chờ xử lý;
+else (Không)
+:Sai minh chứng hoặc hồ sơ trùng: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

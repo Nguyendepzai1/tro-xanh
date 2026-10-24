@@ -1,0 +1,19 @@
+@startuml
+title UC09 Gửi yêu cầu xem phòng
+start
+:Nhập lời nhắn và thời gian muốn xem;
+:Kiểm tra quyền seeker và dữ liệu yêu cầu;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra phòng còn trống; ngày hẹn có thật;
+if (Còn phòng và lịch hợp lệ?) then (Có)
+:Tạo yêu cầu mới gắn người gửi và phòng;
+:Lưu lịch xem theo múi giờ Việt Nam;
+:Hiển thị xác nhận đã gửi liên hệ;
+else (Không)
+:Hết phòng hoặc lịch sai: trả lỗi;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

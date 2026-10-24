@@ -1,0 +1,19 @@
+@startuml
+title UC19 Đồng ý đề nghị đặt cọc
+start
+:Đọc giá thuê, tiền cọc và điều kiện hoàn;
+:Khách xác nhận đồng ý đề nghị;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra trạng thái và phòng còn trống;
+if (Phòng trống và chưa có người giữ chỗ?) then (Có)
+:Khóa giao dịch và kiểm tra giữ chỗ khác;
+:Cập nhật accepted; ghi nhật ký quyết định;
+:Hiển thị tạo giao dịch cọc thử nghiệm;
+else (Không)
+:Phòng đã giữ chỗ hoặc đề nghị hết hạn;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

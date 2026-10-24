@@ -1,0 +1,19 @@
+@startuml
+title UC18 Trò chuyện hai chiều
+start
+:Nhập nội dung và chọn gửi tin;
+:Kiểm tra người gửi thuộc hội thoại;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Kiểm tra mã gửi lặp và giới hạn spam;
+if (Đúng thành viên và chưa vượt 30 tin/phút?) then (Có)
+:Lưu nội dung một lần vào messages;
+:Bên còn lại đọc tin qua truy vấn định kỳ;
+:Cập nhật mốc đã đọc cho đúng thành viên;
+else (Không)
+:Sai hội thoại hoặc gửi quá nhanh: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

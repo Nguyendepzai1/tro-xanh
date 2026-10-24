@@ -1,0 +1,19 @@
+@startuml
+title UC12 Lập hóa đơn tháng
+start
+:Chọn hợp đồng; nhập kỳ, điện, nước và phí;
+:Kiểm tra quyền owner và giá trị không âm;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đọc hợp đồng, đơn giá và kiểm tra trùng kỳ;
+if (Kỳ hợp lệ và chưa có hóa đơn?) then (Có)
+:Tính tiền thuê + điện + nước + dịch vụ;
+:Lưu ảnh chụp đơn giá, tổng và trạng thái unpaid;
+:Hiển thị hóa đơn chờ thu tiền;
+else (Không)
+:Kỳ sai hoặc trùng: trả lỗi 400 / 409;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

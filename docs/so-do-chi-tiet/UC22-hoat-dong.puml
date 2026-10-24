@@ -1,0 +1,19 @@
+@startuml
+title UC22 Thanh toán hóa đơn tháng
+start
+:Chọn hóa đơn tháng cần thanh toán;
+:Kiểm tra quyền sở hữu và hợp đồng;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Lấy số tiền từ hóa đơn ở máy chủ;
+if (Hóa đơn chưa thu và tổng tiền dương?) then (Có)
+:Tạo hoặc trả lại giao dịch đang chờ;
+:Admin đối soát và ghi paid cho hóa đơn;
+:Giữ nguyên số khoản phí thành công;
+else (Không)
+:Sai hóa đơn hoặc đã thu: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

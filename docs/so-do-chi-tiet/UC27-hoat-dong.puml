@@ -1,0 +1,19 @@
+@startuml
+title UC27 Xử lý báo cáo và ẩn tin
+start
+:Đối chiếu nội dung báo cáo với tin phòng;
+:Chọn đã xử lý hoặc chưa đủ cơ sở;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Nhập ghi chú, lựa chọn ẩn và kiểm tra open;
+if (Báo cáo còn mở và quyết định nhất quán?) then (Có)
+:Cập nhật báo cáo và tin trong một transaction;
+:Ghi nhật ký xử lý, chặn quyết định lần hai;
+:Người gửi đọc kết quả trong lịch sử riêng;
+else (Không)
+:Đã xử lý hoặc vừa bỏ qua vừa ẩn: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+title UC20 Đối soát tiền cọc mô phỏng
+start
+:Mở giao dịch chờ trong sổ thử nghiệm;
+:Nhập ghi chú và kiểm tra mã giao dịch;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu số tiền, phòng và tài khoản;
+if (Chờ xử lý, số tiền đúng và phòng hợp lệ?) then (Có)
+:Cập nhật payment paid và deal funded;
+:Ghi nhật ký mô phỏng đối soát;
+:Hiển thị cọc đã ghi nhận, chưa tạo phí;
+else (Không)
+:Đã xử lý hoặc điều kiện thay đổi: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

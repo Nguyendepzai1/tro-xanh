@@ -1,0 +1,21 @@
+@startuml
+title UC15 Tải ảnh minh chứng riêng
+actor "Chủ trọ" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: POST /api/verification-files
+API -> API: Kiểm tra owner, MIME, kích thước và chữ ký ảnh
+API -> DB: SELECT số tệp đã tải của chủ trọ
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: INSERT verification_files với ID ngẫu nhiên
+DB --> API: Kết quả
+API --> UI: 200 trả mã tệp để gắn hồ sơ
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 400 / 401 / 403 / 409
+UI --> U: Thông báo lỗi
+end
+@enduml

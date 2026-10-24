@@ -1,0 +1,19 @@
+@startuml
+title UC11 Kết thúc hợp đồng
+start
+:Chọn hợp đồng và xác nhận kết thúc;
+:Kiểm tra chủ sở hữu và quyền truy cập;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:BEGIN IMMEDIATE; đọc hợp đồng active;
+if (Hợp đồng đang active?) then (Có)
+:Cập nhật lease thành ended;
+:Đặt phòng available; audit; COMMIT;
+:Hiển thị kết thúc; giữ hóa đơn lịch sử;
+else (Không)
+:Không có hợp đồng active: ROLLBACK, 404;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

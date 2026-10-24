@@ -1,0 +1,19 @@
+@startuml
+title UC15 Tải ảnh minh chứng riêng
+start
+:Chọn ảnh minh chứng JPEG hoặc PNG;
+:Kiểm tra phiên chủ trọ và dữ liệu ảnh;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu MIME, chữ ký và hạn mức tệp;
+if (JPEG hoặc PNG tối đa 2 MB, còn hạn mức?) then (Có)
+:Sinh mã ngẫu nhiên và lưu ảnh BLOB;
+:Ghi nhật ký tải minh chứng riêng;
+:Trả mã tệp để gắn vào hồ sơ gửi duyệt;
+else (Không)
+:Sai định dạng, quá cỡ hoặc quá hạn mức;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+title UC14 Khóa tài khoản người dùng
+start
+:Chọn tài khoản và xác nhận khóa;
+:Kiểm tra quyền admin và dữ liệu trạng thái;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Tra cứu tài khoản; không cho khóa admin;
+if (Tài khoản tồn tại và không là admin?) then (Có)
+:Mở giao dịch và đặt active = 0;
+:Xóa phiên tài khoản; ghi audit; COMMIT;
+:Chặn truy cập; tin của chủ trọ bị ẩn công khai;
+else (Không)
+:Không có tài khoản hoặc là admin: trả lỗi;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

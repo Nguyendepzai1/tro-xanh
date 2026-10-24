@@ -1,0 +1,19 @@
+@startuml
+title UC02 Đăng nhập
+start
+:Nhập email và đúng chuỗi mật khẩu;
+:Kiểm tra CSRF; giới hạn số lần thử;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Tìm tài khoản và kiểm tra mật khẩu;
+if (Mật khẩu đúng và active = 1?) then (Có)
+:Hủy phiên cũ; sinh token và CSRF mới;
+:Lưu sessions; đặt cookie HttpOnly;
+:Mở trang tương ứng với vai trò;
+else (Không)
+:Sai thông tin hoặc khóa: lỗi 401;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

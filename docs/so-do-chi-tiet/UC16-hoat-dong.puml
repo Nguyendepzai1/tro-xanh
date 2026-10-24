@@ -1,0 +1,19 @@
+@startuml
+title UC16 Xem minh chứng có kiểm soát
+start
+:Mở minh chứng từ hồ sơ cần đối chiếu;
+:Kiểm tra phiên đăng nhập của người xem;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Tìm mã tệp và kiểm tra chủ sở hữu;
+if (Là admin hoặc chính chủ của tệp?) then (Có)
+:Đọc MIME và BLOB trong SQLite;
+:Đóng gói ảnh thành dữ liệu base64;
+:Hiển thị ảnh trong hộp thoại riêng;
+else (Không)
+:Không có tệp hoặc sai người xem: lỗi 404;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title UC02 Đăng nhập
+actor "Người dùng" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: POST /api/login
+API -> API: Kiểm tra CSRF và giới hạn đăng nhập
+API -> DB: SELECT users; so sánh scrypt
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: DELETE phiên cũ; INSERT sessions với token băm
+DB --> API: Kết quả
+API --> UI: 200 — user, CSRF và cookie mới
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 401 / 403 / 429
+UI --> U: Thông báo lỗi
+end
+@enduml

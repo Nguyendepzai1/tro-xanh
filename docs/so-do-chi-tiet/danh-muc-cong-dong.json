@@ -1,0 +1,141 @@
+[
+  {
+    "id": "UC23",
+    "title": "So sánh phòng còn cho thuê",
+    "actor": "Người tìm phòng",
+    "pre": "Chọn từ 2 đến 3 mã phòng khác nhau.",
+    "path": "GET /api/compare?ids=6,5",
+    "guard": "Kiểm tra 2–3 mã nguyên dương, không trùng",
+    "read": "SELECT tin và chủ trọ theo các mã đã chọn",
+    "condition": "Có phòng còn công khai và chưa giữ chỗ?",
+    "write": "SELECT dữ liệu công khai theo thứ tự chọn",
+    "response": "200 danh sách phòng và mã không còn hợp lệ",
+    "errors": "400",
+    "steps": [
+      "Chọn 2 hoặc 3 phòng trên thẻ tin",
+      "Kiểm tra mã phòng và số lượng lựa chọn",
+      "Đối chiếu công khai, chủ trọ và giữ chỗ",
+      "Lấy giá thuê, cọc, diện tích và tiện ích",
+      "Loại mã không còn hợp lệ, báo người dùng",
+      "Hiển thị bảng và ước tính chi phí"
+    ],
+    "error2": "Không còn phòng: hướng dẫn chọn lại",
+    "post": "API không thay đổi dữ liệu. Dự toán tính ở trình duyệt theo lượng điện, nước và phí dịch vụ nhập vào; không thay số tiền giao dịch."
+  },
+  {
+    "id": "UC24",
+    "title": "Gửi đánh giá sau khi thuê",
+    "actor": "Người thuê",
+    "pre": "Đăng nhập seeker; hợp đồng liên kết đã đến ngày bắt đầu.",
+    "path": "POST /api/reviews",
+    "guard": "Kiểm tra seeker, số sao và độ dài nội dung",
+    "read": "SELECT hợp đồng và đánh giá theo lease_id",
+    "condition": "Đúng người thuê, đã bắt đầu và chưa đánh giá?",
+    "write": "INSERT reviews pending với UNIQUE lease_id",
+    "response": "200 đã gửi đánh giá chờ duyệt",
+    "errors": "400 / 401 / 403 / 404 / 409",
+    "steps": [
+      "Chọn hợp đồng, số sao và nhập trải nghiệm",
+      "Kiểm tra vai trò và dữ liệu đánh giá",
+      "Đối chiếu tài khoản, ngày thuê và bản trùng",
+      "Lưu một đánh giá pending trong transaction",
+      "Ghi nhật ký gửi đánh giá theo tài khoản",
+      "Hiển thị chờ kiểm duyệt trong lịch sử"
+    ],
+    "error2": "Sai hợp đồng hoặc đã gửi: từ chối",
+    "post": "Mỗi hợp đồng chỉ được một đánh giá, kể cả khi đánh giá bị từ chối. Chưa hỗ trợ sửa hoặc gửi lại trong bản hiện tại."
+  },
+  {
+    "id": "UC25",
+    "title": "Kiểm duyệt đánh giá phòng",
+    "actor": "Quản trị viên",
+    "pre": "Đã đăng nhập admin; đánh giá tồn tại.",
+    "path": "PATCH /api/admin/reviews/:id",
+    "guard": "Kiểm tra admin, quyết định và ghi chú",
+    "read": "SELECT đánh giá và trạng thái hiện tại",
+    "condition": "Trạng thái quyết định khác trạng thái hiện tại?",
+    "write": "UPDATE reviews status, note, reviewed_by",
+    "response": "200 cập nhật quyết định kiểm duyệt",
+    "errors": "400 / 401 / 403 / 404 / 409",
+    "steps": [
+      "Đọc đánh giá và kiểm tra nội dung",
+      "Chọn công khai, từ chối hoặc ẩn đánh giá",
+      "Nhập ghi chú và kiểm tra trạng thái cũ",
+      "Lưu trạng thái, ghi chú và người kiểm duyệt",
+      "Ghi nhật ký quyết định của quản trị viên",
+      "Cập nhật điểm trung bình khi đọc công khai"
+    ],
+    "error2": "Quyết định lặp: không xử lý lại",
+    "post": "Chỉ đánh giá published của tài khoản active được tính điểm. Không loại nội dung chỉ vì số sao thấp; thông tin hợp đồng và ghi chú không trả công khai."
+  },
+  {
+    "id": "UC26",
+    "title": "Báo cáo thông tin tin phòng",
+    "actor": "Người sử dụng",
+    "pre": "Đã đăng nhập, không phải admin hoặc chủ tin đang báo cáo.",
+    "path": "POST /api/reports",
+    "guard": "Kiểm tra phiên, lý do và nội dung 20–2000 ký tự",
+    "read": "SELECT tin, báo cáo mở và số gửi trong ngày",
+    "condition": "Tin công khai, chưa báo trùng và còn hạn mức?",
+    "write": "INSERT listing_reports với trạng thái open",
+    "response": "200 đã gửi báo cáo riêng cho quản trị viên",
+    "errors": "400 / 401 / 403 / 404 / 409 / 429",
+    "steps": [
+      "Mở tin và chọn báo cáo thông tin",
+      "Chọn một lý do và mô tả vấn đề",
+      "Kiểm tra chủ tin, trùng và hạn mức 24 giờ",
+      "Lưu báo cáo open gắn đúng tài khoản",
+      "Ghi nhật ký và giữ nguyên tin công khai",
+      "Hiển thị báo cáo trong lịch sử riêng"
+    ],
+    "error2": "Đã có báo cáo mở hoặc quá 10 lượt/ngày",
+    "post": "Không tự động ẩn phòng chỉ vì có báo cáo. Chỉ người gửi và admin đọc được lịch sử; người dùng khác không đọc chéo."
+  },
+  {
+    "id": "UC27",
+    "title": "Xử lý báo cáo và ẩn tin",
+    "actor": "Quản trị viên",
+    "pre": "Admin đăng nhập; báo cáo đang open.",
+    "path": "PATCH /api/admin/reports/:id",
+    "guard": "Kiểm tra admin, ghi chú và lựa chọn ẩn tin",
+    "read": "SELECT báo cáo open trong transaction",
+    "condition": "Báo cáo còn mở và quyết định nhất quán?",
+    "write": "UPDATE báo cáo; tùy chọn UPDATE tin hidden",
+    "response": "200 lưu kết quả và thông báo người gửi",
+    "errors": "400 / 401 / 403 / 409",
+    "steps": [
+      "Đối chiếu nội dung báo cáo với tin phòng",
+      "Chọn đã xử lý hoặc chưa đủ cơ sở",
+      "Nhập ghi chú, lựa chọn ẩn và kiểm tra open",
+      "Cập nhật báo cáo và tin trong một transaction",
+      "Ghi nhật ký xử lý, chặn quyết định lần hai",
+      "Người gửi đọc kết quả trong lịch sử riêng"
+    ],
+    "error2": "Đã xử lý hoặc vừa bỏ qua vừa ẩn: từ chối",
+    "post": "Không cho dismissed đồng thời hide_listing=true. Hai yêu cầu xử lý cùng báo cáo chỉ một lần thành công; không tự chuyển hoặc hoàn tiền."
+  },
+  {
+    "id": "UC28",
+    "title": "Chọn địa chỉ trên toàn quốc",
+    "actor": "Người truy cập",
+    "pre": "Danh mục cục bộ có 34 tỉnh/thành và 3.321 đơn vị cấp xã.",
+    "path": "GET /api/address-catalog/:code",
+    "guard": "Kiểm tra mã tỉnh có trong danh mục",
+    "read": "Đọc danh mục tên và mã đã nạp vào bộ nhớ",
+    "condition": "Mã tỉnh tồn tại trong danh mục?",
+    "write": "Lấy phường, xã, đặc khu thuộc đúng tỉnh",
+    "response": "200 tên tỉnh và danh sách đơn vị cấp xã",
+    "errors": "404",
+    "steps": [
+      "Chọn tỉnh/thành trong danh sách toàn quốc",
+      "Bỏ phường/xã đã chọn của tỉnh trước",
+      "Đối chiếu mã tỉnh với danh mục hiện hành",
+      "Trả đủ danh sách phường/xã của tỉnh",
+      "Ghép nhóm khu vực cũ có trong tin hiện có",
+      "Tìm tên không dấu và chọn khu vực cần lọc"
+    ],
+    "error2": "Mã không tồn tại: thông báo lỗi 404",
+    "post": "Danh mục dùng cho tìm kiếm và đăng/sửa tin, kể cả tỉnh chưa có phòng. Không gọi API địa chỉ ngoài khi sử dụng; không suy đoán đổi toàn bộ địa chỉ cũ.",
+    "storage": "Danh mục JSON"
+  }
+]

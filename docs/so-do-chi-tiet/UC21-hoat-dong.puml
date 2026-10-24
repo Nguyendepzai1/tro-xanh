@@ -1,0 +1,19 @@
+@startuml
+title UC21 Nhận phòng và ghi hoa hồng
+start
+:Khách xác nhận đã ký và nhận phòng;
+:Kiểm tra người xác nhận là khách thuê;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu hợp đồng với đề nghị có cọc;
+if (Đủ cọc, đúng hợp đồng và khách xác nhận?) then (Có)
+:Chuyển đề nghị sang completed;
+:Ghi phí một lần theo tỷ lệ đã chốt;
+:Hiển thị phí do chủ trọ chịu trách nhiệm;
+else (Không)
+:Chưa có hợp đồng khớp hoặc đã hoàn tất;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title UC24 Gửi đánh giá sau khi thuê
+actor "Người thuê" as U
+boundary "Giao diện" as UI
+control "Máy chủ Node.js" as API
+database "SQLite" as DB
+U -> UI: Thực hiện thao tác
+UI -> API: POST /api/reviews
+API -> API: Kiểm tra seeker, số sao và độ dài nội dung
+API -> DB: SELECT hợp đồng và đánh giá theo lease_id
+DB --> API: Dữ liệu kiểm tra
+alt Đủ quyền và điều kiện
+API -> DB: INSERT reviews pending với UNIQUE lease_id
+DB --> API: Kết quả
+API --> UI: 200 đã gửi đánh giá chờ duyệt
+UI --> U: Hiển thị thành công
+else Không hợp lệ
+API --> UI: 400 / 401 / 403 / 404 / 409
+UI --> U: Thông báo lỗi
+end
+@enduml

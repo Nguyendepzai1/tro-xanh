@@ -1,0 +1,19 @@
+@startuml
+title UC10 Tạo hợp đồng thuê phòng
+start
+:Chọn phòng; nhập người thuê và thời hạn;
+:Kiểm tra sở hữu, ngày và tài khoản người thuê;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:BEGIN IMMEDIATE; kiểm tra thuê trùng;
+if (Chưa có hợp đồng hiệu lực?) then (Có)
+:Tạo lease và lưu tenant_user_id nếu có;
+:Đặt occupancy = rented; ghi audit; COMMIT;
+:Hiển thị hợp đồng; ngừng nhận liên hệ mới;
+else (Không)
+:Đã có hợp đồng: ROLLBACK và lỗi 409;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

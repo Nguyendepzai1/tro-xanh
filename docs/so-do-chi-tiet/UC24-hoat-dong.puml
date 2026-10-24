@@ -1,0 +1,19 @@
+@startuml
+title UC24 Gửi đánh giá sau khi thuê
+start
+:Chọn hợp đồng, số sao và nhập trải nghiệm;
+:Kiểm tra vai trò và dữ liệu đánh giá;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đối chiếu tài khoản, ngày thuê và bản trùng;
+if (Đúng người thuê, đã bắt đầu và chưa đánh giá?) then (Có)
+:Lưu một đánh giá pending trong transaction;
+:Ghi nhật ký gửi đánh giá theo tài khoản;
+:Hiển thị chờ kiểm duyệt trong lịch sử;
+else (Không)
+:Sai hợp đồng hoặc đã gửi: từ chối;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

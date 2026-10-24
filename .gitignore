@@ -1,0 +1,14 @@
+data/
+.env
+.env.*
+!.env.example
+node_modules/
+test-results/
+*.log
+*.db
+*.db-wal
+*.db-shm
+*.zip
+~$*
+.DS_Store
+Thumbs.db

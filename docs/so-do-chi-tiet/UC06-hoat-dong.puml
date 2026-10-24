@@ -1,0 +1,19 @@
+@startuml
+title UC06 Kiểm duyệt tin phòng
+start
+:Đọc tin; chọn duyệt, từ chối hoặc ẩn;
+:Kiểm tra quyền admin và ghi chú;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Đọc tin và quyền của chủ sở hữu;
+if (Đủ điều kiện với quyết định chọn?) then (Có)
+:Cập nhật trạng thái và ghi chú nội bộ;
+:Ghi nhật ký quyết định kiểm duyệt;
+:Thông báo kết quả cho quản trị viên;
+else (Không)
+:Tin không có hoặc không đủ quyền: lỗi;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml

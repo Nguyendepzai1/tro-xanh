@@ -1,0 +1,19 @@
+@startuml
+title UC17 Xem hồ sơ công khai chủ trọ
+start
+:Mở hồ sơ từ trang chi tiết phòng;
+:Kiểm tra trạng thái tài khoản chủ trọ;
+if (Yêu cầu và quyền hợp lệ?) then (Có)
+:Lấy giới thiệu và mức kiểm tra hồ sơ;
+if (Chủ trọ active và approved?) then (Có)
+:Lấy các phòng đang cho thuê công khai;
+:Loại thông tin nội bộ và minh chứng;
+:Hiển thị hồ sơ cùng các thẻ phòng;
+else (Không)
+:Chưa có quyền hoặc bị khóa: lỗi 404;
+endif
+else (Không)
+:Thông báo lỗi quyền hoặc dữ liệu;
+endif
+stop
+@enduml
