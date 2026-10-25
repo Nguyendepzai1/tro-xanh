@@ -81,15 +81,15 @@
     "response": "200 mã tin nhắn đã lưu",
     "errors": "400 / 401 / 404 / 409 / 429",
     "steps": [
-      "Nhập nội dung và chọn gửi tin",
-      "Kiểm tra người gửi thuộc hội thoại",
+      "Soạn nhiều dòng; Enter chỉ xuống dòng",
+      "Bấm Gửi và kiểm tra thành viên hội thoại",
       "Kiểm tra mã gửi lặp và giới hạn spam",
       "Lưu nội dung một lần vào messages",
       "Bên còn lại đọc tin qua truy vấn định kỳ",
       "Cập nhật mốc đã đọc cho đúng thành viên"
     ],
     "error2": "Sai hội thoại hoặc gửi quá nhanh: từ chối",
-    "post": "Chủ trọ trả lời bằng cùng API với cùng kiểm tra quyền. Client đọc theo mốc ID, 100 tin mỗi trang và tự cập nhật khoảng 3 giây."
+    "post": "Enter giữ bản nháp nhiều dòng. Chỉ bấm Gửi mới tạo yêu cầu; nội dung giữ dòng trống khi lưu và đọc lại. API tiếp tục kiểm tra hai thành viên, mã chống trùng và giới hạn gửi."
   },
   {
     "id": "UC19",

@@ -35,3 +35,6 @@
 @media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 @media(max-width:760px){.nav-links{justify-content:flex-start;gap:20px;overflow-x:auto;white-space:nowrap;min-width:0;padding-bottom:8px}.nav-links a{flex:0 0 auto;font-size:12px}.nav-links a[aria-current=page]{text-underline-offset:5px}.nav{min-width:0}}
 @media(max-width:480px){.nav{gap:9px}.nav .brand{font-size:23px}.nav .brand i{width:29px;height:29px;font-size:21px;line-height:27px;margin-left:6px}.nav-user{gap:9px}.nav-user>.text-link{font-size:12px}.nav-user .user-label{display:none}.nav-user .btn{padding:8px 10px;font-size:11px}}
+
+#chat-body{min-height:84px;max-height:220px;line-height:1.6;font-size:14px;padding:11px 13px;border:1px solid #ced8e5;border-radius:8px;white-space:pre-wrap;background:white;color:var(--ink)}
+#chat-compose-help b{font-weight:500;color:#50657c}

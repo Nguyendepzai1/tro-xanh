@@ -1,8 +1,8 @@
 @startuml
 title UC18 Trò chuyện hai chiều
 start
-:Nhập nội dung và chọn gửi tin;
-:Kiểm tra người gửi thuộc hội thoại;
+:Soạn nhiều dòng; Enter chỉ xuống dòng;
+:Bấm Gửi và kiểm tra thành viên hội thoại;
 if (Yêu cầu và quyền hợp lệ?) then (Có)
 :Kiểm tra mã gửi lặp và giới hạn spam;
 if (Đúng thành viên và chưa vượt 30 tin/phút?) then (Có)

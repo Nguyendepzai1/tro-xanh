@@ -1,8 +1,8 @@
-# Trọ Xanh phiên bản 1.3
+# Trọ Xanh phiên bản 1.3.1
 
-**Bản 1.3 — tìm kiếm toàn quốc, so sánh chi phí, đánh giá sau thuê và báo cáo tin.**
+**Bản 1.3.1 — nhắn tin nhiều dòng, tìm kiếm toàn quốc, so sánh chi phí, đánh giá sau thuê và báo cáo tin.**
 
-Xem [hướng dẫn bản 1.3](docs/NANG-CAP-1.3.md) và [giao dịch mô phỏng](docs/NANG-CAP-1.2.md). Có 97 bài kiểm thử tự động đạt. Giao dịch cọc, hóa đơn và hoa hồng trên website hiện chỉ là sổ mô phỏng, chưa chuyển tiền thật.
+Trong ô chat, **Enter hoặc Shift+Enter để xuống dòng; bấm Gửi để gửi tin nhắn**. Bản nháp được giữ khi lịch sử tự cập nhật hoặc khi máy chủ từ chối nội dung. Xem [biên bản kiểm thử 1.3.1](docs/KIEM-THU-1.3.1.md), [hướng dẫn bản 1.3](docs/NANG-CAP-1.3.md) và [giao dịch mô phỏng](docs/NANG-CAP-1.2.md). Có 98 bài kiểm thử tự động đạt. Giao dịch cọc, hóa đơn và hoa hồng trên website hiện chỉ là sổ mô phỏng, chưa chuyển tiền thật.
 
 
 Website tìm phòng và quản lý nhà trọ, bản chạy trên máy cho đồ án. Giao diện tiếng Việt với màu xanh dương. Cơ sở dữ liệu SQLite thật, mở được bằng DB Browser for SQLite.
